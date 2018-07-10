@@ -5,8 +5,10 @@ import store from '../Store.js';
 class Summary extends Component {
   render() {
     return (
+      <div>
       <div>Total Count: {this.props.sum}</div>
-    );
+      <div>Average Count:{this.props.average}</div>
+      </div>)
   }
 }
 
@@ -31,13 +33,15 @@ class SummaryContainer extends Component {
   getOwnState() {
     const state = store.getState();
     let sum = 0;
+    let i = 0;
     for (const key in state) {
       if (state.hasOwnProperty(key)) {
+        i++;
         sum += state[key];
       }
     }
 
-    return { sum: sum };
+    return { sum: sum, average: sum / i };
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -54,7 +58,7 @@ class SummaryContainer extends Component {
 
   render() {
     return (
-      <Summary sum={this.state.sum}></Summary>
+      <Summary sum={this.state.sum} average={this.state.average}></Summary>
     );
   }
 }

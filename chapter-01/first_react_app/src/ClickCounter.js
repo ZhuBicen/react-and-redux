@@ -12,6 +12,7 @@ class ClickCounter extends Component {
 
   onClickButton() {
     this.setState({count: this.state.count + 1});
+    this.props.onChange();
   }
 
   render() {
