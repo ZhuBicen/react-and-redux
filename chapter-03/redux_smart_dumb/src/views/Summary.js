@@ -13,7 +13,8 @@ class Summary extends Component {
 }
 
 Summary.propTypes = {
-  sum: PropTypes.number.isRequired
+  sum: PropTypes.number.isRequired,
+  average: PropTypes.number.isRequired
 };
 
 
@@ -45,7 +46,7 @@ class SummaryContainer extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return nextState.sum !== this.state.sum;
+    return nextState.sum !== this.state.sum || nextState.average !== this.state.average;
   }
 
   componentDidMount() {

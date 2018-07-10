@@ -9,14 +9,15 @@ const buttonStyle = {
 
 class Counter extends Component {
   render() {
-    const {caption, onIncrement, onDecrement, value, isMax} = this.props;
+    const {caption, onIncrement, onDecrement, onDouble, value, isMax} = this.props;
     let divStyle = {
-      backgroundColor: isMax == "true" ? "lightblue" : "white"
+      backgroundColor: isMax === "true" ? "lightblue" : "white"
     }  
     return (
       <div style={divStyle}>
         <button style={buttonStyle} onClick={onIncrement}>+</button>
         <button style={buttonStyle} onClick={onDecrement}>-</button>
+        <button style={buttonStyle} onClick={onDouble}>*2</button>
         <span>{caption} count: {value}</span>
         <span> Max:{isMax}</span>
       </div>
@@ -29,7 +30,7 @@ Counter.propTypes = {
   onIncrement: PropTypes.func.isRequired,
   onDecrement: PropTypes.func.isRequired,
   value: PropTypes.number.isRequired,
-  isMax: PropTypes.number.isRequired
+  isMax: PropTypes.string.isRequired
 };
 
 
@@ -39,6 +40,8 @@ class CounterContainer extends Component {
 
     this.onIncrement = this.onIncrement.bind(this);
     this.onDecrement = this.onDecrement.bind(this);
+    this.onDouble = this.onDouble.bind(this);
+
     this.onChange = this.onChange.bind(this);
     this.getOwnState = this.getOwnState.bind(this);
 
@@ -64,11 +67,18 @@ class CounterContainer extends Component {
   }
 
   onIncrement() {
+    console.log("Dispathing onIncrement");
     store.dispatch(Actions.increment(this.props.caption));
   }
 
   onDecrement() {
+    console.log("Dispathing onDecrement");
     store.dispatch(Actions.decrement(this.props.caption));
+  }
+
+  onDouble() {
+    console.log("Dispathing onDouble");
+    store.dispatch(Actions.double(this.props.caption));
   }
 
   onChange() {
@@ -93,6 +103,7 @@ class CounterContainer extends Component {
     return <Counter caption={this.props.caption}
       onIncrement={this.onIncrement}
       onDecrement={this.onDecrement}
+      onDouble={this.onDouble}
       value={this.state.value}
       isMax={this.state.isMax} />
   }
