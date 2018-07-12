@@ -15,9 +15,9 @@ export const decrement = (counterCaption) => {
 };
 
 
-export const double = (couterCaption) => {
+export const double = (counterCaption) => {
   return {
     type:ActionTypes.DOUBLE,
-    couterCaption:couterCaption
+    counterCaption:counterCaption
   }
 }
